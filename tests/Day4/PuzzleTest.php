@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Day1;
+namespace Test\Day4;
 
-use App\Day1\Puzzle;
+use App\Day4\Puzzle;
 use App\FileReader;
 use PHPUnit\Framework\TestCase;
 
@@ -14,20 +14,20 @@ class PuzzleTest extends TestCase
     {
         $this->puzzle = new Puzzle(
             new FileReader(
-                __DIR__ . '/../assets/day1/example.txt'
+                __DIR__ . '/../assets/day4/data.txt'
             )
         );
     }
 
-    public function testPuzzleOne(): void
+    public function testSolveOne(): void
     {
         $result = $this->puzzle->solve01();
-        self::assertEquals(24000, $result);
+        self::assertEquals(2, $result);
     }
 
-    public function testPuzzleTwo(): void
+    public function testSolveTwo(): void
     {
         $result = $this->puzzle->solve02();
-        self::assertEquals(45000, $result);
+        self::assertEquals(4, $result);
     }
 }

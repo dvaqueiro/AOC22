@@ -2,7 +2,9 @@
 
 namespace App\Day2;
 
-class Puzzle
+use App\Puzzle as AppPuzzle;
+
+final class Puzzle extends AppPuzzle
 {
     private const LOOSE = 'X';
     private const DRAW = 'Y';
@@ -12,13 +14,14 @@ class Puzzle
     private const PAPER = 'B';
     private const SCISSOR = 'C';
 
-    public function solve01(string $input): int
+    public function solve01(): int
     {
         $points = 0;
 
-        $stream = fopen($input, 'r');
-        while ($line = fgets($stream)) {
-            $myChoice = $this->normalizeMyChoice($line[2]);
+        foreach ($this->lines as $line) {
+            $myChoice = $this->normalizeMyChoice(
+                $line[2]
+            );
             $points += $this->calculateByChoose(
                 $myChoice
             );
@@ -28,17 +31,15 @@ class Puzzle
                 $myChoice,
             );
         }
-        fclose($stream);
 
         return $points;
     }
 
-    public function solve02(string $input): int
+    public function solve02(): int
     {
         $points = 0;
 
-        $stream = fopen($input, 'r');
-        while ($line = fgets($stream)) {
+        foreach ($this->lines as $line) {
             $myChoice = $this->calculateMyChoice(
                 $line[0],
                 $line[2]
@@ -52,13 +53,13 @@ class Puzzle
                 $myChoice,
             );
         }
-        fclose($stream);
 
         return $points;
     }
 
-    private function normalizeMyChoice(string $myChoice): string
-    {
+    private function normalizeMyChoice(
+        string $myChoice
+    ): string {
         return match ($myChoice) {
             'X' => self::ROCK,
             'Y' => self::PAPER,
@@ -91,8 +92,10 @@ class Puzzle
         };
     }
 
-    private function calculateMyChoice(string $oponent, string $result)
-    {
+    private function calculateMyChoice(
+        string $oponent,
+        string $result
+    ): string {
         return match (true) {
             $oponent === self::ROCK && $result === self::LOOSE => self::SCISSOR,
             $oponent === self::ROCK && $result === self::DRAW => self::ROCK,

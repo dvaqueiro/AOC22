@@ -2,18 +2,18 @@
 
 namespace App\Day3;
 
-class Puzzle
+use App\Puzzle as AppPuzzle;
+
+final class Puzzle extends AppPuzzle
 {
     private string $priorities = '0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    public function solve01(string $input): int
+    public function solve01(): int
     {
         $totalPriority = 0;
         $intersects = [];
 
-        $stream = fopen($input, 'r');
-        while ($line = fgets($stream)) {
-            $line = str_replace("\n", "", $line);
+        foreach ($this->lines as $line) {
             $lineLength = strlen($line);
             $half = ($lineLength / 2);
             $left = substr($line, 0, $half);
@@ -31,21 +31,18 @@ class Puzzle
                 array_pop($intersects)
             );
         }
-        fclose($stream);
 
         return $totalPriority;
     }
 
-    public function solve02(string $input): int
+    public function solve02(): int
     {
         $totalPriority = 0;
         $group = [];
         $rucksacks = 1;
         $intersects = [];
 
-        $stream = fopen($input, 'r');
-        while ($line = fgets($stream)) {
-            $line = str_replace("\n", "", $line);
+        foreach ($this->lines as $line) {
             $group[] = $line;
             if ($rucksacks % 3 === 0) {
                 $intersects = array_intersect(
@@ -62,7 +59,6 @@ class Puzzle
             }
             $rucksacks++;
         }
-        fclose($stream);
 
         return $totalPriority;
     }
