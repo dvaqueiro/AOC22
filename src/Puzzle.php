@@ -13,7 +13,4 @@ abstract class Puzzle
         $this->fileReader = $fileReader;
         $this->lines = $this->fileReader->getFileLines();
     }
-
-    public abstract function solve01(): int;
-    public abstract function solve02(): int;
 }
