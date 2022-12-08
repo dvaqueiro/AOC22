@@ -1,13 +1,6 @@
-# Php kata template
-
-This template is a basic skeleton to perform php katas, main focus in TDD and Testing in general.
+# Advent of code 2022
 
 ## Execute tests
 ```bash
 make tests
-```
-
-## Show php version
-```bash
-make version
 ```
